@@ -3,7 +3,8 @@ import { fetchCjOffers, fetchCjAdvertisers } from "./api/cj";
 
 export default function Home() {
   const onclickHandler = () => {
-    console.log(fetchCjAdvertisers().advertiser);
+    fetchCjAdvertisers().then((data) => console.log(data));
+    // console.log(fetchCjAdvertisers().advertiser);
   };
   return (
     <div>

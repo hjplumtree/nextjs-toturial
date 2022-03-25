@@ -5,7 +5,6 @@ export async function fetchCjAdvertisers() {
     const response = await fetch("/cj-advertiser", {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-        // Accept: "application/xml",
       },
     });
 
@@ -13,12 +12,12 @@ export async function fetchCjAdvertisers() {
       throw new Error("HTTP ERROR Status: " + response.status);
     }
 
+    let data = [];
     const xml = await response.text();
     const advertisers = parseString(xml, (err, result) => {
-      return result["cj-api"].advertisers[0];
+      data = result["cj-api"].advertisers[0];
     });
-    console.log(advertisers);
-    return advertisers;
+    return data;
   } catch (e) {
     throw new Error("fetch ERROR message: " + e.message);
   }
@@ -31,7 +30,6 @@ export async function fetchCjOffers() {
     const response = await fetch("/cj-offers", {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-        // Accept: "application/xml",
       },
     });
 
