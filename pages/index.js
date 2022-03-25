@@ -1,9 +1,9 @@
 import Head from "next/head";
-import fetchCj from "./api/cj";
+import { fetchCjOffers, fetchCjAdvertisers } from "./api/cj";
 
 export default function Home() {
   const onclickHandler = () => {
-    fetchCj();
+    console.log(fetchCjAdvertisers().advertiser);
   };
   return (
     <div>
