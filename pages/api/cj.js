@@ -2,9 +2,9 @@ export async function fetchCjAdvertisers() {
   let parseString = require("xml2js").parseString;
 
   try {
-    const response = await fetch("/cj-advertiser", {
+    const response = await fetch("/cj-advertisers", {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_CJ_TOKEN}`,
       },
     });
 

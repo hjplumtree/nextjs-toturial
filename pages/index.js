@@ -1,23 +1,39 @@
-import Head from "next/head";
-import { fetchCjOffers, fetchCjAdvertisers } from "./api/cj";
+import { server } from "../config";
 
-export default function Home() {
-  const onclickHandler = () => {
-    fetchCjAdvertisers().then((data) => console.log(data));
-    // console.log(fetchCjAdvertisers().advertiser);
-  };
+import { fetchCjOffers, fetchCjAdvertisers } from "./api/cj";
+import ArticleList from "../components/ArticleList";
+
+export default function Home({ articles }) {
+  // const onclickHandler = () => {
+  //   fetchCjAdvertisers().then((data) => console.log(data));
+  // };
   return (
     <div>
-      <Head>
-        <title>Nextjs Tutorial</title>
-        <meta name="description" content="Learning Nextjs by pulling an api " />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1>fetching CJ</h1>
-        <input type="button" value="COME ON CJ" onClick={onclickHandler} />
-      </main>
+      <ArticleList articles={articles} />
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const response = await fetch(`${server}/api/articles`);
+  const articles = await response.json();
+
+  return {
+    props: {
+      articles,
+    },
+  };
+};
+
+// export const getStaticProps = async () => {
+//   const response = await fetch(
+//     `https://jsonplaceholder.typicode.com/posts?_limit=6`,
+//   );
+//   const articles = await response.json();
+
+//   return {
+//     props: {
+//       articles,
+//     },
+//   };
+// };
